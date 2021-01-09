@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+# ask for sudo password and keep sudo alive
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# expand macos save dialog by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# expand printing dialog by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+# automatically close printer app after all jobs are done
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+# save documents by default to local (not to iCloud)
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# disable "smart" quotes/dashes
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# disable autocorrection
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Hide desktop items
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+# do not rearrange spaces on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+
+# showing all files and extensions, allow extension changing, dont write DS on network
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+chflags nohidden ~/Library
+chflags nohidden /Users
+
+# wipe app icons from sidebar
+#defaults write com.apple.dock persistent-apps -array ""
+
+# safari debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# safari developer menu
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# disable time machine prompt on external disks
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# plain text mode in textedit
+defaults write com.apple.TextEdit RichText -int 0
+# utf8 for textedit
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+
