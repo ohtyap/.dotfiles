@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git clone https://github.com/ohtyap/docker-php-dev.git ~/.docker-php-dev
 brew install zsh zsh-autosuggestions zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 touch ~/.zshrc && echo 'source ~/.dotfiles/.zshrc' >> ~/.zshrc
